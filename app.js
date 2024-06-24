@@ -23,7 +23,7 @@ function addBookToLibrary() {
 
 function addBook() {
     for(let i = 0; i < myLibrary.length; i++) {
-
+        let indexNum = i;
          let card = document.createElement("div");
         card.className = "card";
         cardBox.appendChild(card);
@@ -34,15 +34,24 @@ function addBook() {
         let bookPages = document.createElement("p");
         bookPages.textContent = `Pages : ${myLibrary[i].pages}`;
         let readBtn = document.createElement("button");
-        readBtn.textContent = `read`;
+        readBtn.textContent = `Read`;
         let removeBtn = document.createElement("button");
         removeBtn.textContent = `Remove`;
+        
         card.append(bookTitle, bookAuthor, bookPages, readBtn, removeBtn);
 
 
+        readBtn.addEventListener("click", ()=> {
+            if(readBtn.innerText = "Read") {
+                readBtn.innerText = "Unread";
+            } else if (readBtn.innerText = "Unread") {
+                readBtn.innerText = "Read";
+            }
+        })
+
         removeBtn.addEventListener("click", ()=> {
+            myLibrary.splice(indexNum, 1);
             cardBox.removeChild(card);
-            myLibrary.splice(this.index, 1);
         })
     }
 }
@@ -74,12 +83,6 @@ const addBtn2 = document.querySelector(".addBtn2");
 addBtn2.addEventListener("click", ()=> {
     bookForm.style.display = "none";
     addBtn.style.display = "inline";
-
-
-//     const book1 = new Book(title.value, author.value, pages.value);
-// console.log(book1);
-// console.log(title.value, author.value, pages.value);
-
 addBookToLibrary();
 addBook();
 })
