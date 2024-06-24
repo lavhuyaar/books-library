@@ -67,19 +67,19 @@ function addBook() {
     let bookPages = document.createElement("p");
     bookPages.textContent = `Pages : ${myLibrary[i].pages}`;
 
-    //Read-Unread Button
+    //Read-Not read Button
     let readBtn = document.createElement("button");
     if (myLibrary[i].isRead === "true") {
       readBtn.innerText = "Read";
     } else if (myLibrary[i].isRead === "false") {
-      readBtn.innerText = "Unread";
+      readBtn.innerText = "Not read";
     }
     readBtn.className = "readBtn";
     readBtn.addEventListener("click", () => {
       if (readBtn.innerText === "Read") {
         myLibrary[indexNum].isRead = "false";
-        readBtn.innerText = "Unread";
-      } else if (readBtn.innerText === "Unread") {
+        readBtn.innerText = "Not read";
+      } else if (readBtn.innerText === "Not read") {
         myLibrary[indexNum].isRead = "true";
         readBtn.innerText = "Read";
       }
