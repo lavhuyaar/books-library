@@ -49,7 +49,6 @@ function addBookToLibrary() {
   myLibrary.push(
     new Book(title.value, author.value, pages.value, isRead.value)
   );
-  console.log(myLibrary);
   cardBox.innerHTML = ``;
 }
 
