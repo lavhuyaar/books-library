@@ -1,4 +1,3 @@
-let container = document.querySelector(".container");
 let bookForm = document.querySelector(".book-form");
 let title = document.querySelector("#title");
 let author = document.querySelector("#author");
@@ -36,12 +35,14 @@ addBtn2.addEventListener("click", () => {
 //myLibrary Array
 let myLibrary = [];
 
-//Constructor
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+//Class
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
 }
 
 //Adds book to myLibrary Array
