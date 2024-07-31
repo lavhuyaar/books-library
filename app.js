@@ -1,3 +1,9 @@
+window.onload = () => {
+  document.getElementById("title").onchange = checkValidationOfTitle;
+  document.getElementById("pages").onchange = checkValidationOfPages;
+  document.getElementById("author").onchange = checkValidationOfAuthor;
+};
+
 let bookForm = document.querySelector(".book-form");
 let title = document.querySelector("#title");
 let author = document.querySelector("#author");
@@ -21,14 +27,14 @@ addBtn.addEventListener("click", () => {
 //Form button
 let addBtn2 = document.querySelector(".addBtn2");
 addBtn2.addEventListener("click", () => {
-  if (title.value === `` || author.value === `` || pages.value === ``) {
-    alert(`Please fill the details to add book.`);
-  } else {
+  if (title.validity.valid && author.validity.valid && pages.validity.valid) {
     bookForm.style.display = "none";
     addBtn.style.display = "inline";
     cardBox.style.display = "grid";
     addBookToLibrary();
     addBook();
+  } else {
+    alert("Enter the book details properly.");
   }
 });
 
@@ -95,5 +101,58 @@ function addBook() {
     });
 
     card.append(bookTitle, bookAuthor, bookPages, readBtn, removeBtn);
+  }
+}
+
+function checkValidationOfTitle() {
+  let message = document.getElementById("message");
+  let titleInp = document.getElementById("title");
+
+  if (titleInp.validity.valid) {
+    message.textContent = "Input ok";
+    message.style.color = "#0fe40f";
+  } else if (titleInp.validity.valueMissing) {
+    message.textContent = "Required field cannot be empty.";
+    message.style.color = "red";
+    titleInp.validationMessage;
+  } else {
+    message.textContent = "Bad input detected: " + titleInp.validationMessage;
+    message.style.color = "red";
+  }
+}
+
+function checkValidationOfPages() {
+  let messageTwo = document.getElementById("message-two");
+  let pagesInp = document.getElementById("pages");
+
+  if (pagesInp.validity.valid) {
+    messageTwo.textContent = "Input ok";
+    messageTwo.style.color = "#0fe40f";
+  } else if (pagesInp.validity.valueMissing) {
+    messageTwo.textContent = "Required field cannot be empty.";
+    messageTwo.style.color = "red";
+    pagesInp.validationMessage;
+  } else if (pagesInp.validity.rangeUnderflow) {
+    messageTwo.textContent = pagesInp.validationMessage;
+    messageTwo.style.color = "red";
+  } else {
+    message.textContent = "Bad input detected: " + titleInp.validationMessage;
+    message.style.color = "red";
+  }
+}
+
+function checkValidationOfAuthor() {
+  let messageThree = document.getElementById("message-three");
+  let authorInp = document.getElementById("author");
+
+  if (authorInp.validity.valid) {
+    messageThree.textContent = "Input ok";
+    messageThree.style.color = "#0fe40f";
+  } else if (authorInp.validity.invalid) {
+    messageThree.textContent = authorInp.validationMessage;
+    messageThree.style.color = "red";
+  } else if (authorInp.validity.valueMissing) {
+    messageThree.textContent = "Required field cannot be empty.";
+    messageThree.style.color = "red";
   }
 }
